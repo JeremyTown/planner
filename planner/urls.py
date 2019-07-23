@@ -5,6 +5,7 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework import routers
 from apps.plans.views import PlanViewSet, TodoViewSet
+from apps.users.views import UserViewset
 
 
 API_TITLE = 'PlanManager'
@@ -13,8 +14,9 @@ schema_view = get_schema_view(title=API_TITLE)
 
 
 router = routers.DefaultRouter()
-router.register('plans', PlanViewSet)
-router.register('todos', TodoViewSet)
+router.register('plans', PlanViewSet, base_name="plans")
+router.register('todos', TodoViewSet, base_name="todos")
+router.register('users', UserViewset, base_name="users")
 
 
 urlpatterns = [
