@@ -1,15 +1,18 @@
 from django.contrib.auth import get_user_model
+# from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 from rest_framework.mixins import CreateModelMixin
-from apps.users.serializers import UserRegisterSerializer
+from .serializers import UserRegisterSerializer
 from django.contrib.auth.hashers import make_password, check_password
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
+import logging
 
+
+logger = logging.getLogger(__file__)
 
 User = get_user_model()
-
 
 class CustomBackend:
     """

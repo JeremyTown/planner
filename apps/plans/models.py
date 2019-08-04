@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 User = get_user_model()
 
@@ -15,7 +16,7 @@ PRIORITY = (
 
 class Plan(models.Model):
     plan_title = models.CharField(max_length=150, default='Untitled', verbose_name='计划名')
-    created_time = models.DateTimeField(default=datetime.now(), verbose_name='计划创建时间')
+    created_time = models.DateTimeField(auto_now=True, verbose_name='计划创建时间')
     plan_start_time = models.DateTimeField(null=False, verbose_name='计划开始的时间')
     plan_finish_time = models.DateTimeField(null=False, verbose_name='计划完成的时间')
     owner = models.ForeignKey(User, related_name='user_plan', on_delete=models.CASCADE, verbose_name="所有者")
@@ -33,7 +34,7 @@ class Plan(models.Model):
 class Todo(models.Model):
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE, related_name='plan_todo', verbose_name='计划名')
     todo_title = models.CharField(max_length=300, null=False, verbose_name='任务清单')
-    created_time = models.DateTimeField(default=datetime.now(), verbose_name='计划创建时间')
+    created_time = models.DateTimeField(auto_now=True, verbose_name='计划创建时间')
     is_done = models.BooleanField(default=False, verbose_name='是否完成')
     owner = models.ForeignKey(User, related_name='user_todo', on_delete=models.CASCADE, verbose_name="所有者")
 

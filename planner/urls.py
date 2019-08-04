@@ -20,10 +20,11 @@ router.register('users', UserViewset, base_name="users")
 
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('blog/', include('apps.blog.urls.views_urls')),
+    path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('login/', obtain_jwt_token),
+    path('api/login/', obtain_jwt_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('schema/', schema_view),
-    path('docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
+    path('api/schema/', schema_view),
+    path('api/docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
 ]

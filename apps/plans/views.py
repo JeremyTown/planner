@@ -1,7 +1,10 @@
 from rest_framework import viewsets
 from plans.models import Plan, Todo
 from plans.serializers import PlanSerializer, TodoSerializer
+import logging
 
+
+logger = logging.getLogger(__file__)
 
 class PlanViewSet(viewsets.ModelViewSet):
     queryset = Plan.objects.all().order_by('created_time')
